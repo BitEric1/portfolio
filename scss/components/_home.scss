@@ -1,0 +1,148 @@
+@use "../abstracts";
+
+.home {
+    &__content {
+        padding: 40px 0 0;
+    }
+
+    &__icon-wrap {
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+
+        @include abstracts.screen(md) {
+            justify-content: flex-start;
+        }
+    }
+
+    &__icon {
+        font-size: 4rem;
+        width: 100%;
+        height: 100%;
+
+        @include abstracts.screen(md) {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    &__info {
+        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__sub-title {
+        font-weight: 500;
+        line-height: 145%;
+    }
+
+    &__title {
+        margin-top: 10px;
+        font-size: 4.4rem;
+        font-weight: 700;
+    }
+
+    &__desc {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-style: italic;
+        text-wrap: nowrap;
+        overflow: hidden;
+        color: #6c63ff;
+        background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: typing 2s steps(20) infinite alternate-reverse;
+
+        img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__decor {
+        padding: 20px;
+
+        &-inner {
+            padding: 30px 40px;
+            border: 5px solid #f6f6f6;
+
+            @include abstracts.screen(md) {
+                padding: 20px 10px;
+            }
+        }
+
+        &-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f6f6f6;
+        }
+
+        &-right {
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        &-data {
+            width: 80%;
+            height: 10px;
+            background-color: #6c63ff;
+            border-radius: 40px;
+
+            &:last-child {
+                width: 50%;
+            }
+        }
+    }
+
+    &__bottom {
+        --font: 2rem;
+
+        margin: 40px 0 20px 20px;
+
+        @include abstracts.screen(lg) {
+            --font: 1.8rem;
+            margin: 36px 0 20px 20px;
+            font-size: 1.6rem;
+        }
+
+        @include abstracts.screen(sm) {
+            --font: 1.6rem;
+        }
+
+        &-desc {
+            font-size: var(--font);
+            line-height: 145%;
+            color: #4d667e;
+            font-size: var(--font);
+        }
+
+        &-hightlight:first-child {
+            color: #4050b3;
+            font-size: var(--font);
+        }
+
+        &-hightlight-2 {
+            color: #3bc09f;
+            font-size: var(--font);
+        }
+
+        &-link {
+            color: #ca8a03;
+            font-style: italic;
+            text-decoration: underline;
+            font-size: var(--font);
+        }
+    }
+}

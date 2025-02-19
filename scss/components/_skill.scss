@@ -1,0 +1,121 @@
+@use "../abstracts";
+
+.skill-wrap {
+    margin: 16px 0 20px;
+}
+
+.skill__section-title {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.skill__service {
+    margin-top: 10px;
+    &-item {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+    }
+
+    &-desc {
+        margin-right: 20px;
+    }
+}
+
+.skill__tool {
+    &-list {
+        margin-top: 10px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+    }
+
+    &-item {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        justify-content: center;
+        transition: background-color 0.3s linear;
+
+        &:hover {
+            background-color: #f0bf6c;
+        }
+    }
+
+    &-img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.skill__tech {
+    &-list {
+        margin-top: 10px;
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    &-item {
+        width: 500px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding: 20px 10px;
+        border-radius: 20px;
+        background-color: var(--skill-item-bg);
+        transition: all 0.3s linear;
+        box-shadow: 0px 20px 60px 10px var(--skill-item-shadow);
+
+        @include abstracts.screen(xl) {
+            width: 100%;
+        }
+
+        &:hover {
+            transform: translateX(-5px);
+        }
+
+        &--more {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &-title {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    &-desc {
+        margin-top: 4px;
+
+        @include abstracts.screen(lg) {
+            font-size: 1.4rem;
+        } 
+    }
+}
+
+.mores {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.more {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--more-icon-bg);
+}

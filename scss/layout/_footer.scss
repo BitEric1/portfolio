@@ -1,0 +1,9 @@
+@use "../abstracts";
+
+.footer {
+    &__inner {
+        @include abstracts.screen(sm) {
+            padding-top: 60px;
+        }
+    }
+}

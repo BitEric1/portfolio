@@ -1,0 +1,43 @@
+html {
+    --text-color: #1a162e;
+    --icon-color: brightness(0) saturate(100%) invert(6%) sepia(30%) saturate(2359%) hue-rotate(222deg) brightness(97%)
+        contrast(94%);
+    --body-bg: #f6f6f6;
+
+    // Header
+    --header-bg-color: #fff;
+
+    // Header search
+    --header-search-bg: #fff;
+    --header-search-shadow: rgba(237, 237, 246, 0.2);
+
+    // User bg
+    --user-bg-color: #fff;
+    --user-bg-shadow: rgba(237, 237, 246, 0.2);
+    --user-triagle-color: #f5f0f0;
+
+    // Mobile nav
+    --mobile-nav-bg-color: #fff;
+    --mobile-nav-shadow: rgba(237, 237, 246, 0.2);
+
+    // Profile
+    --profile-info-bg: #fff;
+    --profile-info-img-bg: rgba(82, 187, 255, 0.09);
+
+    // Breadcrumb
+    --breadcrum-bg: #fff;
+
+    // Skill
+    --skill-item-bg: #f0efef;
+    --skill-item-shadow: rgba(237, 237, 246, 0.2);
+
+    --more-icon-bg: #171c28;
+
+    // Projects
+    --project-item-bg: #f0efef;
+    --project-item-shadow: rgba(237, 237, 246, 0.2);
+
+    // Home page
+    --home-page-bg-color: linear-gradient(32deg, #e6ccff, #b3b8ff 50%, #b3f5ff);
+    --home-page-btn-color: #fff;
+}

@@ -1,0 +1,214 @@
+@use "../abstracts";
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.profile {
+    &-container {
+        padding: 30px;
+        margin-top: 20px;
+        border-radius: 20px;
+        background-color: var(--profile-info-bg);
+    }
+
+    &__info {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        &-img-wrap {
+            position: relative;
+            width: 282px;
+            height: 282px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 5px #5ebbff, 0 0 10px #5ebbff, 0 0 15px #52bbff, 0 0 20px #52bbff;
+            background-color: var(--profile-info-img-bg);
+
+            @include abstracts.screen(lg) {
+                width: 230px;
+                height: 230px;
+            }
+        }
+
+        &-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 2;
+            object-fit: contain;
+        }
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__name {
+        margin-top: 20px;
+        font-size: 2.8rem;
+        font-weight: 700;
+        line-height: 141.667%;
+        text-transform: uppercase;
+        background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        @include abstracts.screen(sm) {
+            font-size: 3.2rem;
+        }
+    }
+
+    &__desc {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 600;
+
+        @include abstracts.screen(xl) {
+            font-size: 2.2rem;
+        }
+
+        @include abstracts.screen(sm) {
+            font-size: 1.8rem;
+        }
+    }
+
+    &__socials {
+        margin-top: 40px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__social {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        cursor: pointer;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        transition: all 0.4s linear;
+
+        @include abstracts.screen(md) {
+            width: 46px;
+            height: 46px;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 1px;
+            background: linear-gradient(to right, #a174ff, #5ebbff);
+            -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+
+        &-icon {
+            width: 18px;
+            height: 18px;
+            object-fit: cover;
+
+            @include abstracts.screen(md) {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &:hover {
+            background: linear-gradient(90deg, #a174ff, #5ebbff);
+        }
+    }
+
+    &__bottom {
+        margin-top: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include abstracts.screen(md) {
+            margin-top: 50px;
+        }
+    }
+
+    &__cv,
+    &__contact {
+        position: relative;
+        padding: 8px 12px;
+        font-size: 2rem;
+        border-radius: 8px;
+        color: var(--text-color);
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: background-color 0.3s linear;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            padding: 1px;
+            background: linear-gradient(to right, #a174ff, #5ebbff);
+            -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+
+        @include abstracts.screen(lg) {
+            font-size: 1.8rem;
+        }
+
+        &:hover {
+            background: linear-gradient(to right, #a174ff, #5ebbff);
+        }
+    }
+
+    &__main {
+        @include abstracts.screen(md) {
+            margin-top: 30px;
+        }
+    }
+}
+
+.profile__main {
+    height: 100%;
+    &-content {
+        display: none;
+
+        &--active {
+            height: 100%;
+            display: block;
+        }
+    }
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}

@@ -1,0 +1,94 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+* {
+    --webkit-tap-hightlight-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: "Lato", serif;
+    color: var(--text-color);
+    background-color: var(--body-bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+a,
+img,
+input,
+label,
+button,
+textarea,
+select {
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+}
+
+input,
+textarea {
+    background: transparent;
+}
+
+:is(input, textarea):-webkit-autofill,
+:is(input, textarea):-webkit-autofill:focus,
+:is(input, textarea):-webkit-autofill:hover,
+:is(input, textarea):-webkit-autofill:active {
+    caret-color: var(--text-color);
+    -webkit-text-fill-color: var(--text-color);
+    transition: background-color 1s 9999s;
+}
+
+.icon {
+    filter: var(--icon-color);
+}
+
+.container {
+    // @include abstracts.screen(sm) {
+    //     padding-left: 20px !important;
+    //     padding-right: 20px !important;
+    // }
+}
+
+.right {
+    margin-left: auto;
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+.margin-left {
+    margin-left: auto;
+}
+
+// * {
+//     border: 1px solid red !important;
+// }

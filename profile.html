@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile</title>
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon" />
+        <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="./assets/favicon/manifest.json" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <!-- FontAwesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./assets/font/stylesheet.css" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./assets/css/main.css" />
+
+        <!-- Script -->
+        <script src="./assets/js/main.js"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header" id="header"></header>
+        <script>
+            load("#header", "./template/header.html");
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const user = $("#user");
+                const userInfo = $("#user-info");
+                const overlay = $("#user__overlay");
+                const headerSearch = document.querySelector("#header-search");
+
+                if (user && userInfo) {
+                    user.addEventListener("click", () => {
+                        userInfo.classList.toggle("show");
+                        overlay.classList.toggle("show");
+                    });
+                } else {
+                    console.error("Không tìm thấy #user hoặc #user-info");
+                }
+
+                overlay.addEventListener("click", () => {
+                    userInfo.classList.remove("show");
+                    overlay.classList.remove("show");
+                });
+
+                if (headerSearch) {
+                    document.addEventListener("click", (event) => {
+                        if (headerSearch.contains(event.target)) {
+                            headerSearch.classList.add("show");
+                        } else {
+                            headerSearch.classList.remove("show");
+                        }
+                    });
+                } else {
+                    console.error("Không tìm thấy #header-search");
+                }
+
+                const navLinks = document.querySelectorAll(".mobile__nav-link");
+                const pcNavLinks = document.querySelectorAll(".navbar__link");
+                const sections = document.querySelectorAll(".profile__main-content");
+
+                pcNavLinks.forEach((pcNavLink, index) => {
+                    pcNavLink.addEventListener("click", () => {
+                        sections.forEach((section) => {
+                            section.classList.remove("profile__main-content--active");
+                        });
+
+                        pcNavLinks.forEach((pcNavLink) => {
+                            pcNavLink.classList.remove("navbar__link--active");
+                        });
+
+                        pcNavLink.classList.add("navbar__link--active");
+                        sections[index].classList.add("profile__main-content--active");
+                    });
+                });
+
+                navLinks.forEach((link, index) => {
+                    link.addEventListener("click", function () {
+                        // Xóa class active khỏi tất cả các phần nội dung
+                        sections.forEach((section) => {
+                            section.classList.remove("profile__main-content--active");
+                        });
+
+                        navLinks.forEach((navLink) => {
+                            navLink.classList.remove("navbar__link--active");
+                        });
+
+                        // Thêm class active vào phần tương ứng
+                        link.classList.add("navbar__link--active");
+                        sections[index].classList.add("profile__main-content--active");
+                    });
+                });
+
+                const infoBreadcrums = document.querySelectorAll("#profile__infor-link");
+
+                infoBreadcrums.forEach((infoBreadcrum, index) => {
+                    infoBreadcrum.addEventListener("click", () => {
+                        infoBreadcrums.forEach((infoBreadcrum) => {
+                            infoBreadcrum.classList.remove("breadcrumb__link--active");
+                        });
+
+                        infoBreadcrum.classList.add("breadcrumb__link--active");
+                    });
+                });
+            });
+
+            window.addEventListener("template-loaded", () => {
+                const switchBtn = document.querySelector("#switch-theme-btn");
+                if (switchBtn) {
+                    switchBtn.onclick = function () {
+                        const isDark = localStorage.dark === "true";
+                        document.querySelector("html").classList.toggle("dark", !isDark);
+                        localStorage.setItem("dark", !isDark);
+                        switchBtn.querySelector("span").textContent = isDark ? "Dark mode" : "Light mode";
+                    };
+                    const isDark = localStorage.dark === "true";
+                    switchBtn.querySelector("span").textContent = isDark ? "Light mode" : "Dark mode";
+                }
+            });
+
+            const isDark = localStorage.dark === "true";
+            document.querySelector("html").classList.toggle("dark", isDark);
+        </script>
+        <main class="main">
+            <div class="container">
+                <div class="profile-container">
+                    <div class="row">
+                        <div class="col-4 col-lg-5 col-md-12">
+                            <div class="profile__info">
+                                <div id="profile__info-star" class="profile__info-img-wrap">
+                                    <img src="./assets/img/avatar/avatar-min-2.png" alt="" class="profile__info-img" />
+                                </div>
+                                <div class="profile__content">
+                                    <h1 class="profile__name">Hoang Van Bit</h1>
+                                    <p class="profile__desc">
+                                        Code like a <span class="text-effect">one</span>, debug like a
+                                        <span class="text-effect">zero</span>.
+                                    </p>
+                                </div>
+                                <div class="profile__socials">
+                                    <div class="profile__social">
+                                        <a href="https://www.facebook.com/bitericls" target="_blank">
+                                            <img
+                                                src="./assets/icons/facebook.svg"
+                                                alt=""
+                                                class="profile__social-icon icon"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="profile__social">
+                                        <a href="https://github.com/BitEric1" target="_blank">
+                                            <img
+                                                src="./assets/icons/git.svg"
+                                                alt=""
+                                                class="profile__social-icon icon"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="profile__social">
+                                        <a href="https://www.linkedin.com/in/eric-bit-27369430b/" target="_blank">
+                                            <img
+                                                src="./assets/icons/linkin.svg"
+                                                alt=""
+                                                class="profile__social-icon icon"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="profile__social">
+                                        <a
+                                            href="https://open.spotify.com/user/31auwk7uluxttvfjybqyevycknma"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="./assets/icons/sportify.svg"
+                                                alt=""
+                                                class="profile__social-icon icon"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="profile__bottom">
+                                    <button class="profile__cv">My CV</button>
+                                    <button class="profile__contact">Contact me</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-8 col-lg-7 col-md-12">
+                            <!-- Here -->
+                            <div class="profile__main">
+                                <section class="profile__main-content profile__main-content--active">
+                                    <div class="section">
+                                        <div class="section__top">
+                                            <div class="section__top-controls">
+                                                <div class="section__top-item"></div>
+                                                <div class="section__top-item"></div>
+                                                <div class="section__top-item"></div>
+                                            </div>
+                                        </div>
+                                        <div class="section__body home__content">
+                                            <div class="row">
+                                                <div class="col-4 col-lg-3 col-md-12">
+                                                    <div class="home__icon-wrap">
+                                                        <img
+                                                            src="./assets/icons/code-v2.svg"
+                                                            alt=""
+                                                            class="home__icon"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-8 col-md-12">
+                                                    <div class="home__info">
+                                                        <p class="home__sub-title">
+                                                            Hi all, <span class="text-effect">I am</span>
+                                                        </p>
+                                                        <h2 class="home__title text-effect">BitEric</h2>
+                                                        <p class="home__desc">
+                                                            <img
+                                                                src="./assets/icons/terminal.svg"
+                                                                alt=""
+                                                                class="icon"
+                                                            />
+                                                            Frontend Developer.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="home__decor">
+                                                <div class="home__decor-inner">
+                                                    <div class="row">
+                                                        <div class="col-2 offset-1">
+                                                            <div class="home__decor-left">
+                                                                <div class="home__decor-circle"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8 offset-1">
+                                                            <div class="home__decor-right">
+                                                                <div class="home__decor-data"></div>
+                                                                <div class="home__decor-data"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="home__bottom">
+                                                <p class="home__bottom-desc">// Welcome to my profile web.</p>
+                                                <p class="home__bottom-desc">
+                                                    // You can see about information on my Github.
+                                                </p>
+                                                <p class="home__bottom-desc">
+                                                    <span class="home__bottom-hightlight">const</span>
+                                                    <span class="home__bottom-hightlight-2">gitHub</span> =
+                                                    <a
+                                                        target="_blank"
+                                                        href="https://github.com/BitEric1"
+                                                        class="home__bottom-link"
+                                                    >
+                                                        https://github.com/BitEric1
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="profile__main-content">
+                                    <div class="about">
+                                        <div class="section">
+                                            <div class="section__top">
+                                                <div class="section__top-controls">
+                                                    <div class="section__top-item"></div>
+                                                    <div class="section__top-item"></div>
+                                                    <div class="section__top-item"></div>
+                                                </div>
+                                            </div>
+                                            <div class="section__body">
+                                                <div class="breadcrumb">
+                                                    <ul class="breadcrumb__list">
+                                                        <li class="breadcrumb__item">
+                                                            <a
+                                                                href="#about__info"
+                                                                class="breadcrumb__link breadcrumb__link--active"
+                                                                id="profile__infor-link"
+                                                            >
+                                                                Information
+                                                            </a>
+                                                        </li>
+                                                        <li class="breadcrumb__item">
+                                                            <a
+                                                                href="#about__hobby"
+                                                                class="breadcrumb__link"
+                                                                id="profile__infor-link"
+                                                            >
+                                                                Hobbies
+                                                            </a>
+                                                        </li>
+                                                        <li class="breadcrumb__item">
+                                                            <a
+                                                                href="#about__skill"
+                                                                class="breadcrumb__link"
+                                                                id="profile__infor-link"
+                                                            >
+                                                                Skill
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="about__content-wrap">
+                                                    <div class="about__content">
+                                                        <!-- Hide -->
+                                                        <article class="about__info" id="about__info">
+                                                            <h2 class="section__title">1. Information</h2>
+                                                            <div class="about__info-content">
+                                                                <p class="about__info-data">
+                                                                    <img
+                                                                        src="./assets/icons/user.svg"
+                                                                        alt=""
+                                                                        class="about__info-icon icon"
+                                                                    />
+                                                                    Name:
+                                                                    <span class="text-effect about__info-hightlight">
+                                                                        Hoang Van Bit (BitEric)
+                                                                    </span>
+                                                                </p>
+                                                                <p class="about__info-data">
+                                                                    <img
+                                                                        src="./assets/icons/time.svg"
+                                                                        alt=""
+                                                                        class="about__info-icon icon"
+                                                                    />
+                                                                    Date of birth:
+                                                                    <span class="text-effect about__info-hightlight">
+                                                                        March 21, 2005
+                                                                    </span>
+                                                                </p>
+                                                                <p class="about__info-data">
+                                                                    <img
+                                                                        src="./assets/icons/location.svg"
+                                                                        alt=""
+                                                                        class="about__info-icon icon"
+                                                                    />
+                                                                    Address:
+                                                                    <span class="text-effect about__info-hightlight">
+                                                                        Lang Son City
+                                                                    </span>
+                                                                </p>
+                                                                <p class="about__info-data">
+                                                                    <img
+                                                                        src="./assets/icons/call.svg"
+                                                                        alt=""
+                                                                        class="about__info-icon icon"
+                                                                    />
+                                                                    Phone:
+                                                                    <a href="tel:+84336990472">
+                                                                        <span
+                                                                            class="text-effect about__info-hightlight"
+                                                                        >
+                                                                            0336990472
+                                                                        </span>
+                                                                    </a>
+                                                                </p>
+                                                                <p class="about__info-data">
+                                                                    <img
+                                                                        src="./assets/icons/mail.svg"
+                                                                        alt=""
+                                                                        class="about__info-icon icon"
+                                                                    />
+                                                                    Email:
+                                                                    <a href="mailto:hoangbit185@gmail.com">
+                                                                        <span
+                                                                            class="text-effect about__info-hightlight"
+                                                                        >
+                                                                            hoangbit185@gmail.com
+                                                                        </span>
+                                                                    </a>
+                                                                </p>
+                                                            </div>
+                                                        </article>
+                                                        <article class="about__info" id="about__hobby">
+                                                            <h2 class="section__title">2. My hobby</h2>
+                                                            <div class="about__info-content">
+                                                                <p class="about__hobby-data">Reading book</p>
+                                                                <p class="about__hobby-data">Listening to music</p>
+                                                                <p class="about__hobby-data">Reading book</p>
+                                                            </div>
+                                                        </article>
+                                                        <div class="skill-wrap" id="about__skill">
+                                                            <h2 class="section__title">3. My skill</h2>
+                                                            <div class="skill__service">
+                                                                <h3 class="skill__section-title">
+                                                                    <img
+                                                                        src="./assets/icons/check.svg"
+                                                                        alt=""
+                                                                        class="skill__section-title-icon"
+                                                                    />
+                                                                    What can I do
+                                                                </h3>
+                                                                <div class="skill__service">
+                                                                    <div class="skill__service-item">
+                                                                        <img
+                                                                            src="./assets/icons/arrow-right-2.svg"
+                                                                            alt=""
+                                                                            class="skill__service-icon"
+                                                                        />
+                                                                        <p class="skill__service-desc">
+                                                                            Create user interface from figma design.
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="skill__service-item">
+                                                                        <img
+                                                                            src="./assets/icons/arrow-right-2.svg"
+                                                                            alt=""
+                                                                            class="skill__service-icon"
+                                                                        />
+                                                                        <p class="skill__service-desc">
+                                                                            Build interactive interfaces.
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="skill__service-item">
+                                                                        <img
+                                                                            src="./assets/icons/arrow-right-2.svg"
+                                                                            alt=""
+                                                                            class="skill__service-icon"
+                                                                        />
+                                                                        <p class="skill__service-desc">
+                                                                            Build UI UX design.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="skill__tool">
+                                                                <h3 class="skill__section-title">
+                                                                    <img
+                                                                        src="./assets/icons/check.svg"
+                                                                        alt=""
+                                                                        class="skill__section-title-icon"
+                                                                    />
+                                                                    My tool use
+                                                                </h3>
+                                                                <div class="skill__tool-list">
+                                                                    <div class="skill__tool-item">
+                                                                        <img
+                                                                            src="./assets/icons/vscode.svg"
+                                                                            alt=""
+                                                                            class="skill__tool-img"
+                                                                        />
+                                                                    </div>
+                                                                    <div class="skill__tool-item">
+                                                                        <img
+                                                                            src="./assets/icons/git-tool.svg"
+                                                                            alt=""
+                                                                            class="skill__tool-img"
+                                                                        />
+                                                                    </div>
+
+                                                                    <div class="skill__tool-item">
+                                                                        <img
+                                                                            src="./assets/icons/github.svg"
+                                                                            alt=""
+                                                                            class="skill__tool-img"
+                                                                        />
+                                                                    </div>
+                                                                    <div class="skill__tool-item">
+                                                                        <img
+                                                                            src="./assets/icons/figma.svg"
+                                                                            alt=""
+                                                                            class="skill__tool-img"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="skill__tech">
+                                                                <h3 class="skill__section-title">
+                                                                    <img
+                                                                        src="./assets/icons/check.svg"
+                                                                        alt=""
+                                                                        class="skill__section-title-icon"
+                                                                    />
+                                                                    My Technology
+                                                                </h3>
+                                                                <div class="skill__tech-list">
+                                                                    <div class="skill__tech-item">
+                                                                        <div class="skill__tech-icon-wrap">
+                                                                            <img
+                                                                                src="./assets/icons/html.svg"
+                                                                                alt=""
+                                                                                class="skill__tech-icon"
+                                                                            />
+                                                                        </div>
+                                                                        <div class="skill__tech-content">
+                                                                            <h4 class="skill__tech-title">HTML</h4>
+                                                                            <p class="skill__tech-desc">
+                                                                                Have a relatively solid grasp of
+                                                                                <span class="text-effect">HTML</span>
+                                                                                and can apply it to create relatively
+                                                                                good websites.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="skill__tech-item margin-left">
+                                                                        <div class="skill__tech-icon-wrap">
+                                                                            <img
+                                                                                src="./assets/icons/css.svg"
+                                                                                alt=""
+                                                                                class="skill__tech-icon"
+                                                                            />
+                                                                        </div>
+                                                                        <div class="skill__tech-content">
+                                                                            <h4 class="skill__tech-title">CSS</h4>
+                                                                            <p class="skill__tech-desc">
+                                                                                Have a relatively solid grasp of
+                                                                                <span class="text-effect">CSS</span>,
+                                                                                can apply styling to websites.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="skill__tech-item">
+                                                                        <div class="skill__tech-icon-wrap">
+                                                                            <img
+                                                                                src="./assets/icons/js.svg"
+                                                                                alt=""
+                                                                                class="skill__tech-icon"
+                                                                            />
+                                                                        </div>
+                                                                        <div class="skill__tech-content">
+                                                                            <h4 class="skill__tech-title">
+                                                                                JavaScript
+                                                                            </h4>
+                                                                            <p class="skill__tech-desc">
+                                                                                Basic understanding of
+                                                                                <span class="text-effect">
+                                                                                    JavaScript
+                                                                                </span>
+                                                                                knowledge that can be applied to
+                                                                                websites.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="skill__tech-item margin-left">
+                                                                        <div class="skill__tech-icon-wrap">
+                                                                            <div class="mores">
+                                                                                <div class="more"></div>
+                                                                                <div class="more"></div>
+                                                                                <div class="more"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="skill__tech-content skill__tech-item--more"
+                                                                        >
+                                                                            <h4 class="skill__tech-title">More ...</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="profile__main-content">
+                                    <div class="project">
+                                        <div class="section">
+                                            <div class="section__top">
+                                                <div class="section__top-controls">
+                                                    <div class="section__top-item"></div>
+                                                    <div class="section__top-item"></div>
+                                                    <div class="section__top-item"></div>
+                                                </div>
+                                            </div>
+                                            <div class="section__body">
+                                                <div class="project-wrap">
+                                                    <h3 class="section__title project__title">My projects</h3>
+                                                    <div class="project__list">
+                                                        <!-- Item 1 -->
+                                                        <div class="project__item">
+                                                            <div class="project__item-img-wrap">
+                                                                <img
+                                                                    src="./assets/img/project/project-1.jpg"
+                                                                    alt=""
+                                                                    class="project__item-img"
+                                                                />
+                                                            </div>
+                                                            <div class="project__item-content">
+                                                                <h3 class="project__item-title">
+                                                                    Music - Concert Landing Page
+                                                                </h3>
+                                                                <p class="project__item-desc">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                    elit. Id, consequuntur!
+                                                                </p>
+                                                                <div class="project__item-cta">
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://github.com/BitEric1/music-concert"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        Detail
+                                                                    </a>
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://biteric1.github.io/music-concert/"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        View Page
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Item 2 -->
+                                                        <div class="project__item">
+                                                            <div class="project__item-img-wrap">
+                                                                <img
+                                                                    src="./assets/img/project/project-2.jpg"
+                                                                    alt=""
+                                                                    class="project__item-img"
+                                                                />
+                                                            </div>
+                                                            <div class="project__item-content">
+                                                                <h3 class="project__item-title">
+                                                                    Digital Marketing Page
+                                                                </h3>
+                                                                <p class="project__item-desc">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                    elit. Id, consequuntur!
+                                                                </p>
+                                                                <div class="project__item-cta">
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://github.com/BitEric1/digital-maketing"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        Detail
+                                                                    </a>
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://biteric1.github.io/digital-maketing/"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        View Page
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Item 3 -->
+                                                        <div class="project__item">
+                                                            <div class="project__item-img-wrap">
+                                                                <img
+                                                                    src="./assets/img/project/project-3.jpg"
+                                                                    alt=""
+                                                                    class="project__item-img"
+                                                                />
+                                                            </div>
+                                                            <div class="project__item-content">
+                                                                <h3 class="project__item-title">
+                                                                    Gear BWG Landing Page
+                                                                </h3>
+                                                                <p class="project__item-desc">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                    elit. Id, consequuntur!
+                                                                </p>
+                                                                <div class="project__item-cta">
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://github.com/BitEric1/bwa-gear"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        Detail
+                                                                    </a>
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://biteric1.github.io/bwa-gear/"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        View Page
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Item 4 -->
+                                                        <div class="project__item">
+                                                            <div class="project__item-img-wrap">
+                                                                <img
+                                                                    src="./assets/img/project/project-4.jpg"
+                                                                    alt=""
+                                                                    class="project__item-img"
+                                                                />
+                                                            </div>
+                                                            <div class="project__item-content">
+                                                                <h3 class="project__item-title">
+                                                                    Quizzizz Game Landing Page
+                                                                </h3>
+                                                                <p class="project__item-desc">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                    elit. Id, consequuntur!
+                                                                </p>
+                                                                <div class="project__item-cta">
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://github.com/BitEric1/do-vui"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        Detail
+                                                                    </a>
+                                                                    <a
+                                                                        target="_blank"
+                                                                        href="https://dovui.netlify.app/"
+                                                                        class="project__item-btn"
+                                                                    >
+                                                                        View Page
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" id="footer"></footer>
+        <script>
+            load("#footer", "./template/footer.html");
+
+            // Create star
+            const infoStar = document.getElementById("profile__info-star");
+
+            function createStar() {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                infoStar.appendChild(star);
+
+                const x = Math.random() * infoStar.clientWidth;
+                const y = Math.random() * infoStar.clientHeight;
+                const duration = Math.random() * 2 + 1;
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.animationDuration = `${duration}s`;
+
+                setTimeout(() => {
+                    star.remove();
+                }, duration * 2000);
+            }
+
+            setInterval(createStar, 100);
+        </script>
+        <script src="./assets/js/"></script>
+    </body>
+</html>
