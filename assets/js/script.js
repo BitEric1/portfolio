@@ -96,12 +96,13 @@ window.addEventListener("template-loaded", () => {
 const isDark = localStorage.dark === "true";
 document.querySelector("html").classList.toggle("dark", isDark);
 
+// Birthday countdown
 const targetDate = new Date("2025-03-21T00:00:00");
 
 function updateCountdown() {
     const now = new Date();
     const difference = targetDate - now;
-    
+
     if (difference <= 0) {
         document.getElementById("birth-day-date").innerText = "Happy birth day to me!";
         clearInterval(timerInterval);
@@ -117,8 +118,29 @@ function updateCountdown() {
 
     document.getElementById(
         "birth-day-date"
-    ).innerText = `${months} months : ${days} days : ${hours} hours : ${minutes} minutes : ${seconds} seconds`;
+    ).innerText = `${days} days : ${hours} hours : ${minutes} minutes : ${seconds} seconds`;
+
+    document.getElementById(
+        "birth-day-date-dropdown"
+    ).innerText = `${days} days : ${hours} hours : ${minutes} minutes : ${seconds} seconds`;
 }
 const timerInterval = setInterval(updateCountdown, 1000);
 
 updateCountdown();
+
+document.getElementById("birthday-dropdown").innerHTML = `
+        <div class="bith-day__time">
+        <button class="birthday-dropdown__close d--none d-sm-block">&times;</button>
+            <p class="birth-day__time-desc birthday-dropdown__time-desc">
+                <img src="./assets/icons/clock.svg" class="icon" alt="" />
+                Time remaining:
+            </p>
+            <div class="birth-day__date birthday-dropdown__date" id="birth-day-date-dropdown">
+                20 days : xx hours : xx minutes : xx seconds
+            </div>
+        </div>
+        <div class="birthday-dropdown__gif-wrap">
+            <img src="./assets/gif/cute-git.gif" alt="" class="birthday-dropdown__gif" />
+        </div>
+        <p class="birthday-dropdown__desc">It's not time yet, please come back later.</p>
+    `;

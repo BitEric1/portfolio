@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="bith-day__time">
                                                 <p class="birth-day__time-desc">
-                                                    <img src="./assets/icons/clock.svg" alt="" />
+                                                    <img src="./assets/icons/clock.svg" class="" alt="" />
                                                     Time remaining:
                                                 </p>
                                                 <div class="birth-day__date" id="birth-day-date">
@@ -100,6 +100,68 @@
             </div>
         </main>
 
+        <div class="modal">
+            <div class="modal__overlay"></div>
+            <div class="modal__inner">
+                <div class="birthday-dropdown" id="birthday-dropdown">
+                    <button class="birthday-dropdown__close d--none d-sm-block">&times;</button>
+                    <!-- Chua den ngay -->
+                    <!-- <div class="birthday-dropdown__content">
+                        <div class="bith-day__time">
+                            <p class="birth-day__time-desc birthday-dropdown__time-desc">
+                                <img src="./assets/icons/clock.svg" class="icon" alt="" />
+                                Time remaining:
+                            </p>
+                            <div class="birth-day__date birthday-dropdown__date" id="birth-day-date-dropdown">
+                                20 days : xx hours : xx minutes : xx seconds
+                            </div>
+                        </div>
+                        <div class="birthday-dropdown__gif-wrap">
+                            <img src="./assets/gif/cute-git.gif" alt="" class="birthday-dropdown__gif" />
+                        </div>
+                        <p class="birthday-dropdown__desc">It's not time yet, please come back later.</p>
+                    </div> -->
+                    <!-- Den ngay -->
+                    <div class="birthday-dropdown__content">
+                        <div class="bith-day__time">
+                            <p class="birth-day__time-desc birthday-dropdown__time-desc">
+                                <img src="./assets/icons/clock.svg" class="icon" alt="" />
+                                Time remaining:
+                            </p>
+                            <div class="birth-day__date birthday-dropdown__date">
+                                0 days : 0 hours : 0 minutes : 0 seconds
+                            </div>
+                        </div>
+                        <div class="birthday-dropdown__gif-wrap">
+                            <img src="./assets/gif/hbbd.gif" alt="" class="birthday-dropdown__gif" />
+                        </div>
+                        <p class="birthday-dropdown__desc">Today is my birthday. Happy birthday to me!</p>
+                        <form action="" class="form">
+                            <div class="form__group">
+                                <label for="name" class="form__label">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    class="form__input"
+                                    placeholder="Enter your name here"
+                                />
+                            </div>
+                            <div class="form__group">
+                                <label for="birth-day__message" class="form__label">Message</label>
+                                <textarea
+                                    name="message"
+                                    id="birth-day__message"
+                                    class="form__input"
+                                    placeholder="Enter your message here"
+                                ></textarea>
+                            </div>
+                        </form>
+                        <button class="birth-day__btn">SEND</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Footer -->
         <footer class="footer" id="footer"></footer>
         <script>

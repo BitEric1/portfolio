@@ -45,6 +45,7 @@
     }
 
     &__time {
+        position: relative; 
         &-desc {
             display: flex;
             gap: 10px;
@@ -81,5 +82,13 @@
         @include abstracts.screen(lg) {
             font-size: 1.8rem;
         }
+    }
+
+    &__btn {
+        margin-top: 40px;
+        width: 100%;
+        padding: 16px 8px;
+        border-radius: 20px;
+        border: 1px solid #6f43bd;
     }
 }

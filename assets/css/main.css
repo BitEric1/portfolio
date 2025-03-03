@@ -1663,7 +1663,7 @@ strong {
   border: 5px solid rgba(94, 187, 255, 0.2);
   border-radius: 50%;
   cursor: pointer;
-  z-index: 99;
+  z-index: 9;
 }
 .user__info {
   position: absolute;
@@ -2229,6 +2229,7 @@ strong {
   }
 }
 .project__item-desc {
+  line-height: 145%;
   margin: 8px 0 12px 0;
   font-size: 1.8rem;
 }
@@ -2395,7 +2396,7 @@ strong {
   left: 20px;
   right: 20px;
   padding: 16px 0 8px;
-  z-index: 0;
+  z-index: 1;
   background-color: var(--breadcrum-bg);
 }
 .breadcrumb__list {
@@ -2488,6 +2489,9 @@ strong {
 .birth-day__gift-wrap:hover .birth-day__gift {
   animation: skew 0.3s 2;
 }
+.birth-day__time {
+  position: relative;
+}
 .birth-day__time-desc {
   display: flex;
   gap: 10px;
@@ -2523,6 +2527,114 @@ strong {
 }
 @media (max-width: 991.98px) {
   .birth-day__date {
+    font-size: 1.8rem;
+  }
+}
+.birth-day__btn {
+  margin-top: 40px;
+  width: 100%;
+  padding: 16px 8px;
+  border-radius: 20px;
+  border: 1px solid #6f43bd;
+}
+
+.modal {
+  position: relative;
+  z-index: 11;
+}
+.modal__overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  inset: 0;
+}
+.modal__inner {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 30px;
+  background-color: #171c28;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 767.98px) {
+  .modal__inner {
+    width: 400px;
+  }
+}
+@media (max-width: 575.98px) {
+  .modal__inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+.birthday-dropdown {
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+}
+.birthday-dropdown__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.birthday-dropdown__time-desc {
+  justify-content: center;
+  font-size: 2.2rem;
+}
+@media (max-width: 575.98px) {
+  .birthday-dropdown__time-desc {
+    margin-top: 44px;
+  }
+}
+.birthday-dropdown__close {
+  padding: 10px;
+  font-size: 4rem;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+.birthday-dropdown__date {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+@media (max-width: 767.98px) {
+  .birthday-dropdown__date {
+    padding: 6px 12px;
+    font-size: 1.5rem;
+  }
+}
+.birthday-dropdown__gif-wrap {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+@media (max-width: 767.98px) {
+  .birthday-dropdown__gif-wrap {
+    margin-top: 40px;
+    width: 180px;
+    height: 180px;
+  }
+}
+.birthday-dropdown__gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.birthday-dropdown__desc {
+  margin-top: 16px;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+@media (max-width: 767.98px) {
+  .birthday-dropdown__desc {
+    margin-top: 20px;
     font-size: 1.8rem;
   }
 }

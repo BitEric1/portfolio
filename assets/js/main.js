@@ -1,5 +1,5 @@
 const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll(document);
+const $$ = document.querySelectorAll.bind(document);
 
 function load(selector, path) {
     const cached = localStorage.getItem(path);
