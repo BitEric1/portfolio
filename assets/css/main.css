@@ -2484,7 +2484,14 @@ strong {
   cursor: pointer;
   padding: 10px;
   border-radius: 20px;
+  width: 100%;
   background: rgba(111, 67, 189, 0.2);
+}
+.birth-day__gift-wrap a {
+  display: flex;
+  flex-grow: 1;
+  gap: 4px;
+  align-items: center;
 }
 .birth-day__gift-wrap:hover .birth-day__gift {
   animation: skew 0.3s 2;
